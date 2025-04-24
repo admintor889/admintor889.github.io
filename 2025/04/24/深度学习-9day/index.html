@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="深度学习-9day">
+<meta property="og:url" content="http://example.com/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/index.html">
+<meta property="og:site_name" content="路漫漫其修远兮 吾将上下而求索">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-24_18-17-26.png">
+<meta property="article:published_time" content="2025-04-24T09:26:21.000Z">
+<meta property="article:modified_time" content="2025-04-24T12:31:17.494Z">
+<meta property="article:author" content="Cnext">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/Snipaste_2025-04-24_18-17-26.png">
+
+<link rel="canonical" href="http://example.com/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>深度学习-9day | 路漫漫其修远兮 吾将上下而求索</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">路漫漫其修远兮 吾将上下而求索</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cnext">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路漫漫其修远兮 吾将上下而求索">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深度学习-9day
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-24 17:26:21 / 修改时间：20:31:17" itemprop="dateCreated datePublished" datetime="2025-04-24T17:26:21+08:00">2025-04-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><h3 id="处理时间序列"><a href="/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/#处理时间序列" class="headerlink" title="处理时间序列"></a>处理时间序列</h3><p>处理时间序列，前面用到的葡萄酒的数据集就用不了了，那我们转向另一个数据集，自行车共享系统的数据集，来自华盛顿特区的，目标是将一个平面的二维数据集转换为三维数据集</p>
+<p><img src="/images/Snipaste_2025-04-24_18-17-26.png"></p>
+<h5 id="增加一个时间维度"><a href="/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/#增加一个时间维度" class="headerlink" title="增加一个时间维度"></a>增加一个时间维度</h5><p>在源数据中，每一行都是一个单独的时间数据，我们需要改变以每一个小时为行的数据组织的方式</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"># 先查看CSV文件的前几行来了解格式</span><br><span class="line">with open("E:\\code\\staticlist\\kaggle_bike_competition_train.csv", 'r') as f:</span><br><span class="line">    for i, line in enumerate(f):</span><br><span class="line">        print(f"行 {i}: {line.strip()}")  # 打印每行内容，去除首尾空白字符</span><br><span class="line">        if i &gt;= 5:  # 只打印前6行</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line"># 定义一个函数，用于将日期时间字符串转换为小时值</span><br><span class="line">def parse_datetime(date_str):</span><br><span class="line">    try:</span><br><span class="line">        # 日期时间格式为 "YYYY/M/D H:MM"</span><br><span class="line">        # 分割日期和时间部分</span><br><span class="line">        parts = date_str.split()  # 按空格分割，分成日期和时间两部分</span><br><span class="line">        if len(parts) &gt;= 2:</span><br><span class="line">            # 获取时间部分并提取小时</span><br><span class="line">            time_part = parts[1]  # 获取时间部分，如 "H:MM"</span><br><span class="line">            hour = time_part.split(':')[0]  # 分割冒号，获取小时部分</span><br><span class="line">            return float(hour)  # 将小时转换为浮点数</span><br><span class="line">        return 0.0  # 如果无法分割，返回默认值0</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(f"解析错误: {date_str}, {e}")  # 打印错误信息</span><br><span class="line">        return 0.0  # 发生异常时返回默认值0</span><br><span class="line"></span><br><span class="line"># 使用numpy加载CSV数据</span><br><span class="line">bike_numpy = np.loadtxt(</span><br><span class="line">    "E:\\code\\staticlist\\kaggle_bike_competition_train.csv",</span><br><span class="line">    dtype=np.float32,  # 设置数据类型为32位浮点数</span><br><span class="line">    delimiter=',',  # 设置分隔符为逗号</span><br><span class="line">    skiprows=1,  # 跳过第一行（标题行）</span><br><span class="line">    usecols=range(12),  # 使用前12列数据</span><br><span class="line">    converters={0: parse_datetime}  # 对第一列应用自定义转换函数，将日期时间转换为小时</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 将NumPy数组转换为PyTorch张量</span><br><span class="line">bikes = torch.from_numpy(bike_numpy)</span><br><span class="line"></span><br><span class="line"># 打印加载结果</span><br><span class="line">print("数据加载成功!")</span><br><span class="line">print(f"数据形状: {bikes.shape}")  # 打印数据的形状（行数和列数）</span><br><span class="line">print(bikes[:5])  # 打印前5行数据，查看转换结果</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">tensor([[ 0.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.8400, 14.3950, 81.0000,</span><br><span class="line">          0.0000,  3.0000, 13.0000, 16.0000],</span><br><span class="line">        [ 1.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.0200, 13.6350, 80.0000,</span><br><span class="line">          0.0000,  8.0000, 32.0000, 40.0000],</span><br><span class="line">        [ 2.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.0200, 13.6350, 80.0000,</span><br><span class="line">          0.0000,  5.0000, 27.0000, 32.0000],</span><br><span class="line">        [ 3.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.8400, 14.3950, 75.0000,</span><br><span class="line">          0.0000,  3.0000, 10.0000, 13.0000],</span><br><span class="line">        [ 4.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.8400, 14.3950, 75.0000,</span><br><span class="line">          0.0000,  0.0000,  1.0000,  1.0000]])</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">数据集统计了以下信息。</span><br><span class="line">记录的索引：instant。</span><br><span class="line">日期：day。</span><br><span class="line">季节：season（1表示春季，2表示夏季，3表示秋季，4表示冬季）。</span><br><span class="line">年：yr（0表示2011年，1表示2012年）。</span><br><span class="line">月：mnth（1～12）。</span><br><span class="line">时：hr（0～23）。</span><br><span class="line">节假日：holiday。</span><br><span class="line">工作日：weekday。</span><br><span class="line">工作日状态：workingday。</span><br><span class="line">天气状况：weathersit（1表示晴天，2表示雾，3表示小雨/小雪，4表示大雨/大雪）。</span><br><span class="line">摄氏温度（°C）：temp。</span><br><span class="line">感知温度（°C）：atemp。</span><br><span class="line">湿度：hum。</span><br><span class="line">风速：windspeed。</span><br><span class="line">临时用户：casual。</span><br><span class="line">注册用户：registered。</span><br><span class="line">租赁单车数目：cnt。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这样的时间序列数据集中，行表示连续的时间点，有一个维度可以他们对他们进行排序，可以试着根据一天中的某一个时间段来预测自行车的数量，这个就是后面的内容了，暂时不深究，目前专注于学习将共享单车的数据集转换为神经网络能够消化的固定大小的数据块</p>
+<p>这个神经网络需要知道每一个不同信息量的一系列的值，例如乘车次数，当日时间，温度和天气等，N个大小为C的对比序列，其中在神经网络的标准中，C代表通道，和一维数据的列一样，N维代表时间轴</p>
+<h5 id="按照时间段来调整数据"><a href="/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/#按照时间段来调整数据" class="headerlink" title="按照时间段来调整数据"></a>按照时间段来调整数据</h5><p>我们可能想要将2年的数据集分成更细的观察周期，如按天划分，这两我们就有了序列长度为L，样本数量为N的集合C，我们的时间序列数据集将是一个维度为3，形状为NxCxL的张量</p>
+<p>回到数据集，为了获得每一个小时的数据集，我们需要做的就是以24个小时为单位来查看同一个张量，让我们看看bikes张量的形状和步长</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.Size([10886, 12]) (12, 1)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>有10886个小时，12列，现在我们重新调整数据，让它有3个轴，即日，小时</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># -1: 自动计算天数（总行数除以24）</span><br><span class="line"># 24: 每天24小时，将数据按每24行分组</span><br><span class="line"># bikes.shape[1]: 保持原始特征数量不变（12个特征）</span><br><span class="line">daily_bikes = bikes.view(-1, 24, bikes.shape[1])</span><br><span class="line">print(daily_bikes.shape,daily_bikes.stride())</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">torch.Size([453, 24, 12])</span><br></pre></td></tr></tbody></table></figure>
+
+<p>关键是对view的调用，他会改变张量查看存储的相同数据的方法，最右边的维度是原始数据集中的列数，然后中间的维度是时间，将其分割成为连续的24小时，我们需要转置张量：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">daily_bikes = daily_bikes.transpose(1, 2)  # 交换维度，方便后续分析</span><br><span class="line">print(daily_bikes.shape,daily_bikes.stride())</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">daily_bikes = daily_bikes.transpose(1, 2)  # 交换维度，方便后续分析</span><br><span class="line">print(daily_bikes.shape,daily_bikes.stride())</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="准备训练"><a href="/2025/04/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-9day/#准备训练" class="headerlink" title="准备训练"></a>准备训练</h5><p>天气状态变量是有序的，它有四个级别，1表示晴天，4表示大雨/大学，我们可以讲这个变量视为分类变量，将级别解释为标签，或者看成连续变量</p>
+<p>为了更容易呈现数据，我们暂时只关注第一天的数据，我们初始化一个0填充矩阵，其行数等于一天中的小时数，列数等于天气情况级别数</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">first_day = bikes[:24].long()</span><br><span class="line"># print(first_day)</span><br><span class="line">weather_onehot = torch.zeros(first_day.shape[0], 4)</span><br><span class="line">print(first_day[:,4])#输出所有行，第5列的天气情况</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">tensor([1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2])</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后根据每行对应的级别将1散置到矩阵中，</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 使用scatter_函数进行独热编码转换</span><br><span class="line"># 参数说明：</span><br><span class="line"># 1: 表示在第2维（列）上进行散射（索引从0开始）</span><br><span class="line"># first_day[:,4]: 选择第5列（天气状况，值范围1-4）</span><br><span class="line"># .unsqueeze(1): 将一维张量转换为二维，在第2维增加一个维度，使形状从[24]变为[24,1]</span><br><span class="line"># .long(): 将数据类型转换为长整型，因为索引必须是整数</span><br><span class="line"># - 1: 将天气状况值（1-4）转换为索引（0-3）</span><br><span class="line"># 1.0: 在对应位置填充的值</span><br><span class="line">weather_onehot.scatter_(</span><br><span class="line">    1,                                    # dim: 在第2维上进行散射</span><br><span class="line">    first_day[:,4].unsqueeze(1).long() - 1,  # index: 天气状况值转换为索引</span><br><span class="line">    1.0                                   # value: 填充值</span><br><span class="line">)</span><br><span class="line">print(weather_onehot)</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">tensor([[1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [1., 0., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 0., 1., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.],</span><br><span class="line">        [0., 1., 0., 0.]])</span><br></pre></td></tr></tbody></table></figure>
+
+<p>最后我们使用cat函数将矩阵连接到原始数据集，让我们看看第一个结果</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 将原始数据和独热编码后的天气数据拼接在一起，并显示第一个小时的所有特征</span><br><span class="line"># torch.cat: 在指定维度上连接张量</span><br><span class="line"># 参数说明：</span><br><span class="line"># [bikes[:24], weather_onehot]: 要连接的张量列表，包含：</span><br><span class="line">#   - bikes[:24]: 第一天24小时的原始特征数据</span><br><span class="line">#   - weather_onehot: 天气状况的独热编码（24小时×4种天气）</span><br><span class="line"># 1: 在第2维（列）上进行连接，即将特征拼接在一起</span><br><span class="line"># [:1]: 只选择第一行（第一个小时）的数据</span><br><span class="line">print(torch.cat([bikes[:24], weather_onehot], 1)[:1])</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">tensor([[ 0.0000,  1.0000,  0.0000,  0.0000,  1.0000,  9.8400, 14.3950, 81.0000,</span><br><span class="line">          0.0000,  3.0000, 13.0000, 16.0000,  1.0000,  0.0000,  0.0000,  0.0000]])</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这里我们指定了原始张量bikes，以及沿着列连接的独热编码的天气状况矩阵，为了使cat成功。张量必须在其他的维度上具有相同的大小</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-8day/" rel="prev" title="深度学习-8day">
+      <i class="fa fa-chevron-left"></i> 深度学习-8day
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">处理时间序列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%97%B6%E9%97%B4%E7%BB%B4%E5%BA%A6"><span class="nav-number">1.0.1.</span> <span class="nav-text">增加一个时间维度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%89%E7%85%A7%E6%97%B6%E9%97%B4%E6%AE%B5%E6%9D%A5%E8%B0%83%E6%95%B4%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.2.</span> <span class="nav-text">按照时间段来调整数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E8%AE%AD%E7%BB%83"><span class="nav-number">1.0.3.</span> <span class="nav-text">准备训练</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Cnext</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/admintor889" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;admintor889" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cnext</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
